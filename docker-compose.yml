@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  mou-be-app:
+    image: ${IMAGE_NAME}:dev
+    container_name: mou-be-go
+    ports:
+      - "4300:4300"
+    restart: unless-stopped

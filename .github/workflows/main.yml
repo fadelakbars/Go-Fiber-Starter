@@ -1,0 +1,77 @@
+name: MOU-BE-GO
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/mou-be-go
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Create .env file
+        run: |
+          echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mou-be-go" > .env
+          echo "REDIS_DB=${{ secrets.REDIS_DB }}" >> .env
+          echo "APP_HOST=${{ secrets.APP_HOST }}" >> .env
+          echo "APP_PORT=${{ secrets.APP_PORT }}" >> .env
+          echo "APP_READ_TIMEOUT=${{ secrets.APP_READ_TIMEOUT }}" >> .env
+          echo "APP_DEBUG=${{ secrets.APP_DEBUG }}" >> .env
+          echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> .env
+          echo "JWT_SECRET_KEY_EXPIRE_MINUTES_COUNT=${{ secrets.JWT_SECRET_KEY_EXPIRE_MINUTES_COUNT }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "REDIS_ADDR=${{ secrets.REDIS_ADDR }}" >> .env
+          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> .env
+          echo "REDIS_DB=${{ secrets.REDIS_DB }}" >> .env
+          echo "S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}" >> .env
+          echo "S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}" >> .env
+          echo "S3_HOST=${{ secrets.S3_HOST }}" >> .env
+          echo "S3_BUCKET=${{ secrets.S3_BUCKET }}" >> .env
+          echo "MIDTRANS_SERVER_KEY=${{ secrets.MIDTRANS_SERVER_KEY }}" >> .env
+          echo "MIDTRANS_CLIENT_KEY=${{ secrets.MIDTRANS_CLIENT_KEY }}" >> .env
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t $IMAGE_NAME:dev .
+          docker push $IMAGE_NAME:dev
+
+      - name: Add SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/private_key
+          chmod 600 /tmp/private_key
+
+      - name: Copy docker-compose.yml to server
+        run: |
+          scp -i /tmp/private_key -o StrictHostKeyChecking=no docker-compose.yml .env ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/mou-be-go/
+
+      - name: Deploy to server
+        run: |
+          ssh -i /tmp/private_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
+            cd /home/mou-be-go &&
+            export IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mou-be-go &&
+            export REDIS_DB=${{ secrets.REDIS_DB }} &&
+            docker pull $IMAGE_NAME:dev &&
+            docker stop mou-be-go || true &&
+            docker rm mou-be-go || true &&
+            docker run -d --name mou-be-go -p 4300:4300 $IMAGE_NAME:dev;
+            "

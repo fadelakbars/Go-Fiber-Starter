@@ -1,0 +1,18 @@
+package repository
+
+import (
+	"context"
+	"mou-be/apps/domain"
+
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
+
+type VoucherRepository interface {
+	FindAll(ctx context.Context, db *gorm.DB, filters map[string]interface{}) ([]domain.Voucher, int64, int64, error)
+	FindByID(ctx context.Context, db *gorm.DB, id uuid.UUID) (domain.Voucher, error)
+	Create(ctx context.Context, db *gorm.DB, voucher domain.Voucher) (domain.Voucher, error)
+	Update(ctx context.Context, db *gorm.DB, voucher domain.Voucher) (domain.Voucher, error)
+	Delete(ctx context.Context, db *gorm.DB, id uuid.UUID) error
+	FindByCode(ctx context.Context, db *gorm.DB, code string) (domain.Voucher, error)
+}
