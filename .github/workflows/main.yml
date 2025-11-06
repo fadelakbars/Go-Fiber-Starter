@@ -1,4 +1,4 @@
-name: MOU-BE-GO
+name: go-fiber-starter-GO
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/mou-be-go
+      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/go-fiber-starter-go
 
     steps:
       - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mou-be-go" > .env
+          echo "IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/go-fiber-starter-go" > .env
           echo "REDIS_DB=${{ secrets.REDIS_DB }}" >> .env
           echo "APP_HOST=${{ secrets.APP_HOST }}" >> .env
           echo "APP_PORT=${{ secrets.APP_PORT }}" >> .env
@@ -62,16 +62,16 @@ jobs:
 
       - name: Copy docker-compose.yml to server
         run: |
-          scp -i /tmp/private_key -o StrictHostKeyChecking=no docker-compose.yml .env ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/mou-be-go/
+          scp -i /tmp/private_key -o StrictHostKeyChecking=no docker-compose.yml .env ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/home/go-fiber-starter-go/
 
       - name: Deploy to server
         run: |
           ssh -i /tmp/private_key -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
-            cd /home/mou-be-go &&
-            export IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mou-be-go &&
+            cd /home/go-fiber-starter-go &&
+            export IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/go-fiber-starter-go &&
             export REDIS_DB=${{ secrets.REDIS_DB }} &&
             docker pull $IMAGE_NAME:dev &&
-            docker stop mou-be-go || true &&
-            docker rm mou-be-go || true &&
-            docker run -d --name mou-be-go -p 4300:4300 $IMAGE_NAME:dev;
+            docker stop go-fiber-starter-go || true &&
+            docker rm go-fiber-starter-go || true &&
+            docker run -d --name go-fiber-starter-go -p 4300:4300 $IMAGE_NAME:dev;
             "

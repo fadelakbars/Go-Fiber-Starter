@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  mou-be-app:
+  go-fiber-starter-app:
     image: ${IMAGE_NAME}:dev
-    container_name: mou-be-go
+    container_name: go-fiber-starter-go
     ports:
       - "4300:4300"
     restart: unless-stopped

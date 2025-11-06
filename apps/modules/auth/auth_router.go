@@ -1,10 +1,10 @@
 package auth
 
 import (
-	"mou-be/apps/middleware"
-	"mou-be/apps/modules/auth/controller"
-	"mou-be/apps/modules/auth/service"
-	"mou-be/apps/modules/user/repository"
+	"go-fiber-starter/apps/middleware"
+	"go-fiber-starter/apps/modules/auth/controller"
+	"go-fiber-starter/apps/modules/auth/service"
+	"go-fiber-starter/apps/modules/user/repository"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"

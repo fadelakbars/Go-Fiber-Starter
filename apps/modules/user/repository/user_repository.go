@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"mou-be/apps/domain"
+	"go-fiber-starter/apps/domain"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"

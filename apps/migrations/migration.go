@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"go-fiber-starter/apps/config"
+	"go-fiber-starter/apps/domain"
 	"log"
-	"mou-be/apps/config"
-	"mou-be/apps/domain"
 
 	"github.com/spf13/viper"
 )

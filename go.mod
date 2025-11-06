@@ -1,17 +1,14 @@
-module mou-be
+module go-fiber-starter
 
 go 1.23.4
 
 require (
-	github.com/aws/aws-sdk-go v1.55.6
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/google/uuid v1.6.0
-	github.com/midtrans/midtrans-go v1.3.8
 	github.com/redis/go-redis/v9 v9.7.1
 	github.com/spf13/viper v1.19.0
 	golang.org/x/crypto v0.35.0
-	gorm.io/datatypes v1.2.5
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
 )
@@ -26,7 +23,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.17.9 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

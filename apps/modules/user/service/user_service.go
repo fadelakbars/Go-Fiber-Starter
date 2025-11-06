@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"mou-be/apps/domain"
-	"mou-be/apps/modules/user/repository"
+	"go-fiber-starter/apps/domain"
+	"go-fiber-starter/apps/modules/user/repository"
 
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"

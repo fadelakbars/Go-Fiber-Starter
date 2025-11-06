@@ -1,10 +1,10 @@
 package user
 
 import (
-	"mou-be/apps/middleware"
-	"mou-be/apps/modules/user/controller"
-	"mou-be/apps/modules/user/repository"
-	"mou-be/apps/modules/user/service"
+	"go-fiber-starter/apps/middleware"
+	"go-fiber-starter/apps/modules/user/controller"
+	"go-fiber-starter/apps/modules/user/repository"
+	"go-fiber-starter/apps/modules/user/service"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"

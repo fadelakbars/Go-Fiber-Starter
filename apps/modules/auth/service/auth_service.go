@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"mou-be/apps/domain"
+	"go-fiber-starter/apps/domain"
 )
 
 type AuthService interface {

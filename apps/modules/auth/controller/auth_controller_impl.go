@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"mou-be/apps/helpers"
-	"mou-be/apps/modules/auth/service"
+	"go-fiber-starter/apps/helpers"
+	"go-fiber-starter/apps/modules/auth/service"
 
 	"github.com/gofiber/fiber/v2"
 )

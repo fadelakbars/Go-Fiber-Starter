@@ -21,3 +21,8 @@ func (u *User) BeforeCreate(tx *gorm.DB) error {
 	u.CreatedAt = time.Now()
 	return nil
 }
+
+func (u *User) BeforeUpdate(tx *gorm.DB) error {
+	u.CreatedAt = time.Now()
+	return nil
+}

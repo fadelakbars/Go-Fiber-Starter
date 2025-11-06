@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"mou-be/apps/domain"
-	"mou-be/apps/helpers"
-	"mou-be/apps/modules/user/service"
+	"go-fiber-starter/apps/domain"
+	"go-fiber-starter/apps/helpers"
+	"go-fiber-starter/apps/modules/user/service"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"

@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
+	"go-fiber-starter/apps/config"
+	"go-fiber-starter/apps/middleware"
+	"go-fiber-starter/apps/router"
 	"log"
-	"mou-be/apps/config"
-	"mou-be/apps/middleware"
-	"mou-be/apps/router"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors" 
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/spf13/viper"
 )
 

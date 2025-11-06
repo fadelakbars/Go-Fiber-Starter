@@ -1,8 +1,8 @@
 package router
 
 import (
-	auth "mou-be/apps/modules/auth"
-	user "mou-be/apps/modules/user"
+	auth "go-fiber-starter/apps/modules/auth"
+	user "go-fiber-starter/apps/modules/user"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"

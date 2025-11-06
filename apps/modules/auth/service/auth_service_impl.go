@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 	"errors"
-	"mou-be/apps/domain"
-	"mou-be/apps/helpers"
-	"mou-be/apps/modules/user/repository"
+	"go-fiber-starter/apps/domain"
+	"go-fiber-starter/apps/helpers"
+	"go-fiber-starter/apps/modules/user/repository"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"

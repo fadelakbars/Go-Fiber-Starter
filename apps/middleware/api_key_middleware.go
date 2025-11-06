@@ -16,7 +16,7 @@ func APIKeyMiddleware() fiber.Handler {
 		}
 
 		// Ganti sesuai kebutuhan atau load dari env/config file
-		validKey := "mZ71bBgd>a2nr@Cfq+-NR^xdd)"
+		validKey := "Go-Fiber-Starter-API-Key"
 
 		if apiKey != validKey {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
