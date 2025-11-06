@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors" // Import middleware CORS
+	"github.com/gofiber/fiber/v2/middleware/cors" 
 	"github.com/spf13/viper"
 )
 
@@ -23,7 +23,6 @@ func init() {
 
 func setup() *fiber.App {
 	db := config.DBConnect()
-	rdb := config.CreateRedisClient()
 	middleware.InitSecretKey()
 
 	app := fiber.New()
@@ -36,19 +35,8 @@ func setup() *fiber.App {
 		AllowCredentials: true, // Jika perlu mengirim credentials seperti cookies atau Authorization header
 	}))
 
-	// Initialize S3 client
-	s3Config, err := config.InitS3()
-	if err != nil {
-		log.Fatalf("Error initializing S3 client: %s", err)
-	}
-
-	_, err = config.LoadMidtransConfig()
-	if err != nil {
-		log.Fatal("Failed to load Midtrans configuration:", err)
-	}
-
 	// Setup routes
-	router.SetupRoutes(app, db, rdb, s3Config.Service, s3Config.BucketName)
+	router.SetupRoutes(app, db)
 
 	return app
 }

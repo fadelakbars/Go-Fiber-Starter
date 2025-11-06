@@ -24,18 +24,7 @@ func main() {
 
 	db := config.DBConnect()
 
-	// db.AutoMigrate(&domain.User{})
-	// db.AutoMigrate(&domain.Session{})
-	// db.AutoMigrate(&domain.Booth{})
-	// db.AutoMigrate(&domain.Payment{})
-	// db.AutoMigrate(&domain.PhotoResult{})
-	// db.AutoMigrate(&domain.Voucher{})
-	// db.AutoMigrate(&domain.Payment{})
-	// db.AutoMigrate(&domain.Order{})
-	// db.AutoMigrate(&domain.Voucher{})
-	// db.AutoMigrate(&domain.VoucherTemplate{})
-	// db.AutoMigrate(&domain.Booth{})
-	db.AutoMigrate(&domain.Test{})
+	db.AutoMigrate(&domain.User{})
 
 	fmt.Println("👍 Migration complete")
 }

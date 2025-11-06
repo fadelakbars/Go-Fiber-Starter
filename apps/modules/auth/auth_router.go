@@ -7,11 +7,10 @@ import (
 	"mou-be/apps/modules/user/repository"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
-func Router(app fiber.Router, db *gorm.DB, rdb *redis.Client) {
+func Router(app fiber.Router, db *gorm.DB) {
 	repo := repository.NewUserRepository()
 	svc := service.NewAuthService(repo, db)
 	ctrl := controller.NewAuthController(svc)
